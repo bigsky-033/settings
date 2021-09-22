@@ -113,7 +113,7 @@ map <C-n> :NERDTreeToggle<CR>
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
