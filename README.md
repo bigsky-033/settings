@@ -6,7 +6,7 @@ This repository contains settings for my personal dev environments.
 
 ![neofetch_result](./img/neofetch_result.png)
 
-## Languages
+## Programming Languages
 
 ### Java
 
