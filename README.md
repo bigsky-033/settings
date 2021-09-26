@@ -1,6 +1,6 @@
 # Settings
 
-This repository contains every settings for my personal dev environments.
+This repository contains settings for my personal dev environments.
 
 ## Machine & OS
 
