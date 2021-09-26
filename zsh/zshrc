@@ -28,7 +28,7 @@ ZSH_TMUX_AUTOSTART=true
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:${GOPATH}/bin
-#export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin
 
 # oh my zsh
 source $ZSH/oh-my-zsh.sh
