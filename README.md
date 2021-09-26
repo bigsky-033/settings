@@ -76,3 +76,9 @@ This repository contains settings for my personal dev environments.
 
 ![intellij_create_desktop_entry](img/intellij_create_desktop_entry.png)
 
+### LLVM & Clang
+
+- Install
+  - Use apt to install clang instead of clone, build & add it to path.
+    - LLVM Debian/Ubuntu nightly packages: [Link](https://apt.llvm.org/)
+
