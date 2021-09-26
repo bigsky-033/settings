@@ -60,7 +60,7 @@ This repository contains every settings for my personal dev environments.
 - Config
   - Copy config file from `git://alacritty/alacritty.yml` to `file://$HOME/.config/alacritty/alacritty.yml`.
 
-### Intellij
+### Intellij Community Edition
 
 - Install
   - Download idea file via official download page. And put it in to `$HOME/Applications` directory. And make symblokc link like `ln -s idea-IC-212.5284.40 idea`. And launch application via `idea/bin/idea.sh`. After that, create desktop entry by clicking option in `Configure`.
