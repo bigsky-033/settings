@@ -1,0 +1,43 @@
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+export LANG=en_US.UTF-8
+
+plugins=(
+	git
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+    tmux
+)
+
+
+# Add applications to path
+export PATH=$PATH:$HOME/Applications
+
+# neovim
+alias vi="nvim"
+alias vim="nvim"
+alias view="nvim -R"
+alias vimdiff="nvim -d"
+
+# tmux
+ZSH_TMUX_AUTOSTART=true
+
+# golang
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:${GOPATH}/bin
+#export PATH=$PATH:/usr/local/go/bin
+
+# oh my zsh
+source $ZSH/oh-my-zsh.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+neofetch
