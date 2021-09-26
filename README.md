@@ -46,6 +46,14 @@ This repository contains every settings for my personal dev environments.
 - Config
   - Copy config file from `git://settings/nvim/init.vim` to `file://$HOME/.config/nvim/init.vim`.
 
+### Tmux
+
+- Install
+  - Follow description in official web page: [Link](https://github.com/tmux/tmux/wiki/Installing)
+    - Run `apt install tmux`.
+- Config
+  - Copy config file from `git://tmux/tmux.conf` to `file://$HOME/.tmux.conf`.
+
 #### Vim Plugins
 
 - Use `junegunn/vim-plug` to manage plugins. Go to official page and follow guides to install & manage plugins including vim-plug: [Link](https://github.com/junegunn/vim-plug)
