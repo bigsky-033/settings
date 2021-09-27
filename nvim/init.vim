@@ -92,6 +92,11 @@ call plug#begin()
 
 " Declare the list of plugins.
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -152,6 +157,43 @@ for _, lsp in ipairs(servers) do
     flags = {
       debounce_text_changes = 150,
     }
+  }
+end
+EOF
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" hrsh7th/nvim-cmp
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set completeopt=menu,menuone,noselect
+
+lua <<EOF
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+    end,
+  },
+  mapping = {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'buffer' },
+  }
+})
+
+local nvim_lsp = require('lspconfig')
+local servers = { 'gopls', 'clangd', 'bashls', 'tailwindcss' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
 EOF
