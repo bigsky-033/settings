@@ -18,6 +18,11 @@ This repository contains settings for my personal dev environments.
 - Install
   - Follow description in official web page: [Link](https://golang.org/doc/install)
 
+### Node
+
+- Install
+  - Use nvm to install & manage nodes: [Link](https://github.com/nvm-sh/nvm)
+
 ## Applications & Tools
 
 ### JetBrains Mono
