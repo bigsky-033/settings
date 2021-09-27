@@ -111,7 +111,10 @@ call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim/nvim-lspconfig
+" hrsh7th/nvim-cmp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set completeopt=menu,menuone,noselect
+
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
@@ -148,25 +151,6 @@ local on_attach = function(client, bufnr)
 
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'clangd', 'bashls', 'tailwindcss' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-EOF
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" hrsh7th/nvim-cmp
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set completeopt=menu,menuone,noselect
-
-lua <<EOF
 local cmp = require'cmp'
 
 cmp.setup({
@@ -189,10 +173,15 @@ cmp.setup({
   }
 })
 
-local nvim_lsp = require('lspconfig')
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
 local servers = { 'gopls', 'clangd', 'bashls', 'tailwindcss' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
 end
