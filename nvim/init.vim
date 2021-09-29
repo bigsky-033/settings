@@ -105,6 +105,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'nanotech/jellybeans.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -210,4 +212,3 @@ let g:indent_guides_enable_on_vim_startup = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set colorscheme as jellybeans
 colorscheme jellybeans
-
