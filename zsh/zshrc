@@ -21,9 +21,6 @@ alias vim="nvim"
 alias view="nvim -R"
 alias vimdiff="nvim -d"
 
-# tmux
-ZSH_TMUX_AUTOSTART=true
-
 # golang
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
