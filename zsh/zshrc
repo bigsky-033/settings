@@ -11,9 +11,8 @@ plugins=(
 	tmux
 )
 
-
 # Add applications to path
-export PATH=$PATH:$HOME/Applications
+export PATH="$PATH:$HOME/Applications"
 
 # neovim
 alias vi="nvim"
@@ -21,15 +20,19 @@ alias vim="nvim"
 alias view="nvim -R"
 alias vimdiff="nvim -d"
 
+# tmux
+#ZSH_TMUX_AUTOSTART=true
+
 # golang
-export GOPATH=$HOME/go
-export GOBIN=$HOME/go/bin
-export PATH=$PATH:${GOPATH}/bin
-export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:~/go/bin"
 
 # node
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# flutter
+export PATH="$PATH:/home/bigsky033/development/flutter/bin"
 
 # oh my zsh
 source $ZSH/oh-my-zsh.sh
@@ -51,3 +54,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 neofetch
+
