@@ -6,10 +6,23 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vscode.cpptools",
-        "ms-vscode.cmake-tools",
-        "ms-vscode.makefile-tools",
-        "twxs.cmake"
+        "llvm-vs-code-extensions.vscode-clangd",
+        "xaver.clang-format",
+        "cheshirekow.cmake-format",
+        "twxs.cmake",
+        "matepek.vscode-catch2-test-adapter",
+        "webfreak.debug",
+        "vadimcn.vscode-lldb",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "cschlosser.doxdocgen",
+        "aaron-bond.better-comments",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "adpyke.codesnap",
+        "wayou.vscode-todo-highlight",
+        "zixuanwang.linkerscript",
+        "ms-vscode.makefile-tools"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
@@ -18,10 +31,27 @@
             "path": "/bin/bash"
           }
         },
-        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+        "clangd.arguments": [
+          "--background-index",
+          "--compile-commands-dir=build",
+          "--completion-style=detailed",
+          "--header-insertion=iwyu",
+          "--suggest-missing-includes",
+          "--clang-tidy",
+          "--all-scopes-completion"
+        ],
+        "editor.formatOnSave": true,
+        "C_Cpp.intelliSenseEngine": "disabled",
+        "C_Cpp.autocomplete": "disabled",
+        "C_Cpp.errorSquiggles": "disabled",
+        "[c]": {
+          "editor.defaultFormatter": "xaver.clang-format"
+        },
+        "editor.inlayHints.enabled": "off"
       }
     }
   },
   "remoteUser": "bigsky033",
-  "features": {}
+  "features": {},
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y clangd clang-format clang-tidy"
 }
