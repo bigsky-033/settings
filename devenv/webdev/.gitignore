@@ -1,0 +1,108 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.output/
+
+# Testing
+coverage/
+.nyc_output/
+jest-report/
+test-results/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.envrc
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.vim/
+*.sublime-*
+.project
+.classpath
+.settings/
+.history/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker related
+.dockerignore
+docker-compose.override.yml
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.dump
+
+# Package manager specific
+.yarn/
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+yarn.lock
+package-lock.json
+npm-shrinkwrap.json
+
+# Local workspace files
+workspace/*
+!workspace/test-app/
+!workspace/README.md
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Specific to frameworks
+# React / Create React App
+.eslintcache
+.env.development
+.env.test
+.env.production
+
+# Next.js
+.vercel
+.next/
+out/
+
+# Vite
+.vite/
+
+# Debug
+.debug/

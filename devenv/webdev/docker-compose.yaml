@@ -1,0 +1,21 @@
+version: "3"
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webdev-environment
+    volumes:
+      - ./workspace:/home/bigsky033/workspace
+    ports:
+      - "3000:3000" # React default
+      - "5173:5173" # Vite default
+      - "8000:8000" # Common dev server
+      - "8080:8080" # Common dev server
+      - "9000:9000" # Common dev server
+    environment:
+      - NODE_ENV=development
+      - LANG=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+    stdin_open: true
+    tty: true

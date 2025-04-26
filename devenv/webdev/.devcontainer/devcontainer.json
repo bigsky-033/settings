@@ -1,0 +1,49 @@
+{
+  "name": "Web Development Environment",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "dev",
+  "workspaceFolder": "/home/bigsky033/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "dsznajder.es7-react-js-snippets",
+        "ms-azuretools.vscode-docker",
+        "streetsidesoftware.code-spell-checker",
+        "mikestead.dotenv",
+        "GitHub.copilot",
+        "ritwickdey.LiveServer",
+        "ms-vscode.live-server",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "editor.tabSize": 2,
+        "git.enableSmartCommit": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "javascript.updateImportsOnFileMove.enabled": "always",
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/bower_components": true,
+          "**/dist": true
+        }
+      }
+    }
+  },
+  "forwardPorts": [3000, 5173, 8000, 8080, 9000],
+  "remoteUser": "bigsky033",
+  "features": {
+    "git": "latest"
+  }
+}
