@@ -1,6 +1,6 @@
-# Web Development Environment
+# Web Development Project Environment
 
-A containerized development environment for web development with Node.js and JavaScript/TypeScript frameworks.
+A containerized development environment for Node.js web projects with optimized persistent dependencies.
 
 ## Features
 
@@ -8,68 +8,112 @@ A containerized development environment for web development with Node.js and Jav
 - Node.js LTS pre-installed
 - NVM for managing multiple Node.js versions
 - Multilingual support (English, Korean)
-- Common global packages installed:
-  - TypeScript
-  - Create React App
-  - Vite
-  - Nx
-- Persistent volume for node_modules
+- Common global packages installed
+- Persistent volume for node_modules (faster installs, better performance)
 - Pre-configured ports for common web frameworks
 - VS Code devcontainer support
 
-## Setup
+## How to Use This Template
 
-### Option 1: Using Docker Compose
+This template is designed to be copied into your Node.js project and provide a consistent, isolated development environment.
 
-1. Make sure you have Docker and Docker Compose installed
-2. Run the setup script:
+### Step 1: Copy Template Files to Your Project
 
 ```bash
-./build.sh
+# Create a new project directory if needed
+mkdir my-awesome-project
+cd my-awesome-project
+
+# Copy the webdev environment files to your project
+cp -r /path/to/settings/devenv/webdev/{Dockerfile,docker-compose.yaml,build.sh,.devcontainer} .
+
+# Make the build script executable
+chmod +x build.sh
 ```
 
-3. Access the container:
+### Step 2: Initialize Your Project (If New)
+
+If this is a new project, initialize it:
 
 ```bash
+# Initialize a new Node.js project
+npm init -y
+
+# OR use a framework
+npx create-react-app .
+# OR
+npm create vite@latest .
+```
+
+### Step 3: Start the Development Environment
+
+```bash
+# Build and start the container
+./build.sh
+
+# Access the container shell
 docker exec -it webdev-environment bash
 ```
 
-### Option 2: Using VS Code Dev Containers
+### Step 4: Work with Your Project
 
-1. Install the "Remote - Containers" extension in VS Code
-2. Open the folder containing this repository in VS Code
-3. VS Code will prompt you to "Reopen in Container" - click this button
-4. VS Code will build and start the container, and connect to it
-
-## Directory Structure
-
-- `workspace/`: This directory is mounted to `/home/bigsky033/workspace` in the container
-- All your projects should be created in this directory
-
-## Included Tools
-
-- Node.js LTS
-- npm, yarn, and pnpm
-- Git
-- Common build tools
-
-## Starting a New Project
-
-Once inside the container, you can start a new project using various frameworks:
+Inside the container, your project is available at `/home/bigsky033/app`.
 
 ```bash
-# React project
-cd workspace
-create-react-app my-react-app
+# Inside the container
+cd /home/bigsky033/app
 
-# Vite project
-cd workspace
-npm create vite@latest my-vite-app
+# Install dependencies
+npm install
+
+# Start development server
+npm start  # or npm run dev
 ```
 
-## Changing Node.js Versions
+## Using VS Code Dev Containers
 
-You can use NVM to switch between different Node.js versions:
+For the best development experience:
+
+1. Install the "Remote - Containers" extension in VS Code
+2. Open your project folder in VS Code
+3. VS Code will detect the devcontainer configuration and prompt you to "Reopen in Container"
+4. VS Code will open inside the container, with full extension support
+
+## Understanding the Setup
+
+- Your project files are mounted at `/home/bigsky033/app` inside the container
+- The `node_modules` directory uses a Docker volume for better performance
+- This approach prevents node_modules from syncing to your host, which:
+  - Improves performance (especially on macOS/Windows)
+  - Avoids platform-specific binary issues
+  - Reduces disk usage on your host machine
+
+## Customizing Your Environment
+
+### Project-Specific Container Name
+
+Edit `docker-compose.yaml` to change the container name:
+
+```yaml
+container_name: my-project-name  # instead of webdev-environment
+```
+
+### Adding Dependencies to package.json
+
+Any changes to your package.json will be visible inside the container. To install dependencies:
+
+```bash
+# Inside the container
+npm install some-package
+# OR
+npm install some-dev-package --save-dev
+```
+
+The dependencies will be installed to the volume-mounted node_modules and persist across container restarts.
+
+### Changing Node.js Version
+
+Inside the container, use NVM:
 
 ```bash
 # List available versions
@@ -82,16 +126,30 @@ nvm install 18
 nvm use 18
 ```
 
-## Language Support
+## Troubleshooting
 
-The environment comes with support for multiple languages, including Korean. By default, it uses English (US) locale. To switch to Korean:
+### Container Won't Start
+
+Check if the ports are already in use:
 
 ```bash
-# Switch to Korean locale
+lsof -i :3000
+```
+
+### Node Modules Issues
+
+If you encounter permission problems:
+
+```bash
+# Inside the container
+sudo chown -R bigsky033:bigsky033 /home/bigsky033/app
+```
+
+### Korean Language Support
+
+To switch to Korean locale:
+
+```bash
 export LANG=ko_KR.UTF-8
 export LC_ALL=ko_KR.UTF-8
-
-# Switch back to English
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 ```

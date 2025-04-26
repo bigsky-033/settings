@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile
     container_name: webdev-environment
     volumes:
-      - ./workspace:/home/bigsky033/workspace
+      - .:/home/bigsky033/app
+      - node_modules:/home/bigsky033/app/node_modules
     ports:
       - "3000:3000" # React default
       - "5173:5173" # Vite default
@@ -19,3 +20,6 @@ services:
       - LC_ALL=en_US.UTF-8
     stdin_open: true
     tty: true
+
+volumes:
+  node_modules:

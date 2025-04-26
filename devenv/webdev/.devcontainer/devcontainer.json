@@ -2,7 +2,7 @@
   "name": "Web Development Environment",
   "dockerComposeFile": "../docker-compose.yaml",
   "service": "dev",
-  "workspaceFolder": "/home/bigsky033/workspace",
+  "workspaceFolder": "/home/bigsky033/app",
   "customizations": {
     "vscode": {
       "extensions": [
