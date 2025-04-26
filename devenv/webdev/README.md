@@ -88,6 +88,26 @@ For the best development experience:
   - Avoids platform-specific binary issues
   - Reduces disk usage on your host machine
 
+## Example Application
+
+A basic test application is included in the `test-app` directory. You can use this to verify your environment setup:
+
+1. Copy the test app to your project directory:
+```bash
+cp -r /path/to/settings/devenv/webdev/test-app/* .
+```
+
+2. Start the container and run the app:
+```bash
+./build.sh
+docker exec -it webdev-environment bash
+cd /home/bigsky033/app
+npm install
+npm run dev
+```
+
+3. Visit http://localhost:8080 in your browser to see the test application
+
 ## Customizing Your Environment
 
 ### Project-Specific Container Name
