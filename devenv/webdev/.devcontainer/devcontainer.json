@@ -1,6 +1,6 @@
 {
   "name": "Web Development Environment",
-  "dockerComposeFile": "../docker-compose.yaml",
+  "dockerComposeFile": "docker-compose.yaml",
   "service": "dev",
   "workspaceFolder": "/home/bigsky033/app",
   "customizations": {
@@ -45,5 +45,6 @@
   "remoteUser": "bigsky033",
   "features": {
     "git": "latest"
-  }
+  },
+  "postCreateCommand": "sudo mkdir -p /home/bigsky033/app/node_modules && sudo chown -R bigsky033:bigsky033 /home/bigsky033/app/node_modules && sudo chmod -R 755 /home/bigsky033/app/node_modules"
 }

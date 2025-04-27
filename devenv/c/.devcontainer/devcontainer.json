@@ -1,6 +1,6 @@
 {
   "name": "C Development Environment",
-  "dockerComposeFile": "../docker-compose.yaml",
+  "dockerComposeFile": "docker-compose.yaml",
   "service": "dev",
   "workspaceFolder": "/home/bigsky033",
   "customizations": {

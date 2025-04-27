@@ -52,6 +52,10 @@ ENV LANG=en_US.UTF-8 \
 USER bigsky033
 WORKDIR /home/bigsky033
 
+# Create app directory with correct permissions
+RUN mkdir -p /home/bigsky033/app \
+    && chown -R bigsky033:bigsky033 /home/bigsky033/app
+
 # Configure bash for Korean locale support
 RUN echo 'export LANG=en_US.UTF-8' >> ~/.bashrc \
     && echo 'export LC_ALL=en_US.UTF-8' >> ~/.bashrc \

@@ -3,10 +3,10 @@ services:
   dev:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     container_name: webdev-environment
     volumes:
-      - .:/home/bigsky033/app
+      - ..:/home/bigsky033/app
       - node_modules:/home/bigsky033/app/node_modules
     ports:
       - "3000:3000" # React default

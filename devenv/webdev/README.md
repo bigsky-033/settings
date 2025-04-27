@@ -17,21 +17,52 @@ A containerized development environment for Node.js web projects with optimized 
 
 This template is designed to be copied into your Node.js project and provide a consistent, isolated development environment.
 
-### Step 1: Copy Template Files to Your Project
+### Option 1: Use the Setup Script (Recommended)
+
+A helper script is provided to automatically set up the environment for your project:
+
+```bash
+# Run the setup script
+/path/to/settings/devenv/webdev/setup-project.sh
+```
+
+The script will:
+1. Ask for your project directory
+2. Generate a unique container name based on your project
+3. Copy all required files with proper configuration
+4. Optionally copy the test application
+5. Provide instructions for next steps
+
+### Option 2: Manual Setup
+
+If you prefer to set up manually:
 
 ```bash
 # Create a new project directory if needed
 mkdir my-awesome-project
 cd my-awesome-project
 
-# Copy the webdev environment files to your project
-cp -r /path/to/settings/devenv/webdev/{Dockerfile,docker-compose.yaml,build.sh,.devcontainer} .
+# Create .devcontainer directory
+mkdir -p .devcontainer
 
-# Make the build script executable
-chmod +x build.sh
+# Copy Docker files to .devcontainer
+cp -r /path/to/settings/devenv/webdev/Dockerfile .devcontainer/
+cp -r /path/to/settings/devenv/webdev/docker-compose.yaml .devcontainer/
+cp -r /path/to/settings/devenv/webdev/build.sh .devcontainer/
+cp -r /path/to/settings/devenv/webdev/.devcontainer/devcontainer.json .devcontainer/
+
+# Edit docker-compose.yaml to change the container name to something unique
+sed -i 's/container_name: webdev-environment/container_name: my-awesome-project-dev/' .devcontainer/docker-compose.yaml
+
+# Edit devcontainer.json to point to the local docker-compose file
+sed -i 's/"dockerComposeFile": "..\/docker-compose.yaml"/"dockerComposeFile": "docker-compose.yaml"/' .devcontainer/devcontainer.json
+
+# Make the build script executable and create a symlink in the root
+chmod +x .devcontainer/build.sh
+ln -s .devcontainer/build.sh build.sh
 ```
 
-### Step 2: Initialize Your Project (If New)
+### Step 3: Initialize Your Project (If New)
 
 If this is a new project, initialize it:
 
@@ -79,6 +110,15 @@ For the best development experience:
 3. VS Code will detect the devcontainer configuration and prompt you to "Reopen in Container"
 4. VS Code will open inside the container, with full extension support
 
+## Directory Structure
+
+- `.devcontainer/`
+  - `Dockerfile` - Defines the container environment
+  - `docker-compose.yaml` - Configures container settings and port mappings
+  - `build.sh` - Script to build and start the container
+  - `devcontainer.json` - VS Code Dev Containers configuration
+- `build.sh` (symlink) - Convenient link to the build script inside .devcontainer
+
 ## Understanding the Setup
 
 - Your project files are mounted at `/home/bigsky033/app` inside the container
@@ -112,7 +152,7 @@ npm run dev
 
 ### Project-Specific Container Name
 
-Edit `docker-compose.yaml` to change the container name:
+Edit `.devcontainer/docker-compose.yaml` to change the container name:
 
 ```yaml
 container_name: my-project-name  # instead of webdev-environment
@@ -156,13 +196,23 @@ Check if the ports are already in use:
 lsof -i :3000
 ```
 
-### Node Modules Issues
+### Node Modules Permission Issues
 
-If you encounter permission problems:
+If you encounter "EACCES: permission denied" when installing packages:
 
 ```bash
-# Inside the container
+# Method 1: Fix permissions (inside the container)
 sudo chown -R bigsky033:bigsky033 /home/bigsky033/app
+sudo chmod -R 755 /home/bigsky033/app/node_modules
+
+# Method 2: Use the --unsafe-perm flag with npm
+npm install --unsafe-perm
+
+# Method 3: If the above doesn't work, you can recreate the volume
+# (outside the container, stop it first)
+docker compose down
+docker volume rm webdev_node_modules
+docker compose up -d
 ```
 
 ### Korean Language Support

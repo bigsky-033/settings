@@ -14,18 +14,53 @@ A containerized development environment for C programming with clangd integratio
 - clang-tidy for static analysis
 - VSCode integration via devcontainer
 
-## Getting Started
+## How to Use This Template
 
-### Prerequisites
+This template is designed to be copied into your C/C++ project and provide a consistent, isolated development environment.
 
-- [Docker](https://www.docker.com/get-started)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [VS Code Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+### Option 1: Use the Setup Script (Recommended)
+
+A helper script is provided to automatically set up the environment for your project:
+
+```bash
+# Run the setup script
+/path/to/settings/devenv/c/setup-project.sh
+```
+
+The script will:
+1. Ask for your project directory
+2. Generate a unique container name based on your project
+3. Copy all required files with proper configuration
+4. Provide instructions for next steps
+
+### Option 2: Manual Setup
+
+If you prefer to set up manually:
+
+```bash
+# Create a new project directory if needed
+mkdir my-c-project
+cd my-c-project
+
+# Create .devcontainer directory
+mkdir -p .devcontainer
+
+# Copy Docker files to .devcontainer
+cp -r /path/to/settings/devenv/c/.devcontainer/* .devcontainer/
+
+# Edit docker-compose.yaml to change the container name to something unique
+sed -i 's/container_name: c-dev-environment/container_name: my-c-project-dev/' .devcontainer/docker-compose.yaml
+
+# Make the build script executable and create a symlink in the root
+chmod +x .devcontainer/build.sh
+ln -s .devcontainer/build.sh build.sh
+ln -s .devcontainer/generate_compile_commands.sh generate_compile_commands.sh
+```
 
 ### Using with VS Code (Recommended)
 
 1. Open VS Code
-2. Open the folder containing this repository
+2. Open your project folder
 3. When prompted, click "Reopen in Container" (or click the green icon in the bottom-left corner and select "Reopen in Container")
 4. VS Code will build the container and set up the development environment
 
@@ -35,10 +70,10 @@ If you prefer not to use VS Code's devcontainer feature:
 
 ```bash
 # Build and start the container
-docker-compose up -d
+./build.sh
 
 # Attach to the container
-docker exec -it c-dev-environment bash
+docker exec -it c-dev-environment bash  # or your custom container name
 ```
 
 ## Generating compile_commands.json
@@ -63,10 +98,33 @@ For clangd to work properly, it needs a compile_commands.json file. You can gene
    bear -- make
    ```
 
-## Important Files
+## Directory Structure
 
-- `.devcontainer/` - VS Code devcontainer configuration
-- `.clang-format` - Configuration for code formatting
-- `Dockerfile` - Container definition
-- `docker-compose.yaml` - Container orchestration
-- `generate_compile_commands.sh` - Helper script for clangd
+- `.devcontainer/`
+  - `Dockerfile` - Defines the container environment (x86_64 architecture)
+  - `docker-compose.yaml` - Configures container settings and port mappings
+  - `build.sh` - Script to build and start the container
+  - `devcontainer.json` - VS Code Dev Containers configuration
+  - `generate_compile_commands.sh` - Helper script for clangd
+- `build.sh` (symlink) - Convenient link to the build script inside .devcontainer
+- `generate_compile_commands.sh` (symlink) - Convenient link to the helper script inside .devcontainer
+
+## Customizing Your Environment
+
+### Project-Specific Container Name
+
+Edit `.devcontainer/docker-compose.yaml` to change the container name:
+
+```yaml
+container_name: my-project-c-dev  # instead of c-dev-environment
+```
+
+### Adding Development Tools
+
+You can customize the Dockerfile to add additional development tools:
+
+```dockerfile
+RUN apt-get update && apt-get install -y \
+    your-package-name \
+    another-package
+```
