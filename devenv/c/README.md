@@ -55,6 +55,9 @@ sed -i 's/container_name: c-dev-environment/container_name: my-c-project-dev/' .
 chmod +x .devcontainer/build.sh
 ln -s .devcontainer/build.sh build.sh
 ln -s .devcontainer/generate_compile_commands.sh generate_compile_commands.sh
+
+# Copy .clang-format to project root for code formatting
+cp /path/to/settings/devenv/c/.clang-format .
 ```
 
 ### Using with VS Code (Recommended)

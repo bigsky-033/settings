@@ -104,6 +104,10 @@ print_success "Copied generate_compile_commands.sh to .devcontainer/"
 ln -s ".devcontainer/generate_compile_commands.sh" "$TARGET_DIR/generate_compile_commands.sh"
 print_success "Created convenience symlink for generate_compile_commands.sh in project root"
 
+# Copy .clang-format to project root
+cp "$SCRIPT_DIR/.clang-format" "$TARGET_DIR/"
+print_success "Copied .clang-format to project root"
+
 # Display success message and next steps
 print_header "SETUP COMPLETE"
 echo -e "Your C/C++ development environment has been set up successfully in: ${GREEN}$TARGET_DIR${NC}"
