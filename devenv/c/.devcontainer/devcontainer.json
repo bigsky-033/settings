@@ -52,6 +52,5 @@
     }
   },
   "remoteUser": "bigsky033",
-  "features": {},
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y clangd clang-format clang-tidy"
+  "features": {}
 }

@@ -1,17 +1,18 @@
 # C Development Environment
 
-A containerized development environment for C programming with clangd integration.
+A containerized development environment for C programming with LLVM/Clang 20 toolchain and clangd integration.
 
 ## Features
 
 - Ubuntu 22.04 base image
-- GCC and Clang compilers
+- GCC and Clang 20 compilers (latest LLVM toolchain)
 - GDB and LLDB debuggers
 - CMake build system
 - Valgrind memory checker
-- clangd for code intelligence
-- clang-format for code formatting
-- clang-tidy for static analysis
+- clangd-20 for code intelligence
+- clang-format-20 for code formatting
+- clang-tidy-20 for static analysis
+- Vim and Neovim editors with Lua runtime support
 - VSCode integration via devcontainer
 
 ## How to Use This Template
@@ -104,11 +105,12 @@ For clangd to work properly, it needs a compile_commands.json file. You can gene
 ## Directory Structure
 
 - `.devcontainer/`
-  - `Dockerfile` - Defines the container environment (x86_64 architecture)
+  - `Dockerfile` - Defines the container environment (x86_64 architecture with LLVM 20)
   - `docker-compose.yaml` - Configures container settings and port mappings
   - `build.sh` - Script to build and start the container
   - `devcontainer.json` - VS Code Dev Containers configuration
   - `generate_compile_commands.sh` - Helper script for clangd
+- `.clang-format` - Code formatting configuration (LLVM style with custom settings)
 - `build.sh` (symlink) - Convenient link to the build script inside .devcontainer
 - `generate_compile_commands.sh` (symlink) - Convenient link to the helper script inside .devcontainer
 
